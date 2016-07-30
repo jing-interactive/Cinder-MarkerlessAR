@@ -1,0 +1,94 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Blocks">
+      <UniqueIdentifier>{03AFFE60-634E-4B33-B044-5F1EFB6CD342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\OpenCV3">
+      <UniqueIdentifier>{FFAB23BF-4A49-4511-B750-D415AB15AAFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\OpenCV3\include">
+      <UniqueIdentifier>{1B7BA4C2-1E2A-4BDF-B9CF-CEDCAF37878D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\vnm">
+      <UniqueIdentifier>{021EDAD1-7C5F-418E-8CDE-1413575FB24E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\vnm\src">
+      <UniqueIdentifier>{DD7E5E25-6A33-4CE1-B464-89CD44C7C81B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\vnm\include">
+      <UniqueIdentifier>{04F2F35C-874E-412D-9E8E-7879764849A7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\CinderMarklessARApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CinderMarklessARApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-OpenCV3\include\CinderOpenCV.h">
+      <Filter>Blocks\OpenCV3\include</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Cinder\blocks\Cinder-VNM\src\AssetManager.cpp">
+      <Filter>Blocks\vnm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cinder\blocks\Cinder-VNM\src\DistortionHelper.cpp">
+      <Filter>Blocks\vnm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cinder\blocks\Cinder-VNM\src\MiniConfig.cpp">
+      <Filter>Blocks\vnm\src</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\AssetManager.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\CaptureHelper.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\DistortionHelper.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\GlslParamsBuilder.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\MiniConfig.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\MiniConfigImgui.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\MotionHelper.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\StateMachine.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cinder\blocks\Cinder-VNM\include\TextureHelper.h">
+      <Filter>Blocks\vnm\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
