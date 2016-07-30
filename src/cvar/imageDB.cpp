@@ -34,7 +34,7 @@
 #include "orException.h"
 #include "commonCvFunctions.h"
 #include <iostream>
-#include <opencv2/calib3d/calib3d.hpp>
+#include "opencv2/calib3d.hpp"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -42,7 +42,6 @@
 using namespace std;
 using namespace cv;
 using namespace cvar;
-using namespace cvar::or;
 
 imageDB::imageDB(void)
 {
@@ -98,7 +97,7 @@ void imageDB::release()
 }
 
 
-int imageDB::registImageFeatures(int img_id, Size img_size, vector<KeyPoint> kp_vec, vector<int> id_list)
+int imageDB::registImageFeatures(int img_id, cv::Size img_size, vector<KeyPoint> kp_vec, vector<int> id_list)
 {
 	featureInfo	feat_info;
 
@@ -239,7 +238,7 @@ bool greaterResultMatch(const resultInfo& result_A, const resultInfo& result_B)
 	return result_A.matched_num > result_B.matched_num;
 }
 
-vector<resultInfo> imageDB::retrieveImageId(const vector<KeyPoint>& kp_vec, const vector<int>& id_list, Size img_size, int visual_word_num, int result_num)
+vector<resultInfo> imageDB::retrieveImageId(const vector<KeyPoint>& kp_vec, const vector<int>& id_list, cv::Size img_size, int visual_word_num, int result_num)
 {
 	// Handling param error
 	if(voteNum * kp_vec.size() != id_list.size() || visual_word_num < 1){
@@ -398,7 +397,7 @@ vector<resultInfo> imageDB::calcMatchCountResult(const vector<KeyPoint>& kp_vec,
 
 
 
-vector<resultInfo> imageDB::calcGeometryConsistentResult(const vector<KeyPoint>& kp_vec, const vector<resultInfo>& tmp_result_vec, Size img_size, int result_num)
+vector<resultInfo> imageDB::calcGeometryConsistentResult(const vector<KeyPoint>& kp_vec, const vector<resultInfo>& tmp_result_vec, cv::Size img_size, int result_num)
 {
 	vector<resultInfo> result_vec;
 
@@ -597,7 +596,7 @@ int imageDB::load(const string& filename)
 
 int imageDB::write(FileStorage& cvfs, const string& name) const
 {
-	WriteStructContext ws(cvfs, name, CV_NODE_MAP);
+	cv::internal::WriteStructContext ws(cvfs, name, CV_NODE_MAP);
 	cv::write(cvfs,"imageNum",imageNum);
 	cv::write(cvfs,"featureNum",featureNum);
 	cv::write(cvfs,"threshold",threshold);
@@ -633,12 +632,12 @@ int imageDB::read(const FileStorage& cvfs, const FileNode& node)
 int imageDB::writeFeatureKptMap(FileStorage& cvfs, const string& name) const
 {
 	try{
-		WriteStructContext ws(cvfs, name, CV_NODE_SEQ);
+		cv::internal::WriteStructContext ws(cvfs, name, CV_NODE_SEQ);
 
 		multimap<int,featureInfo>::const_iterator itr = feature_KPT_map.begin();
 		featureInfo	feature_info;
 		while(itr!= feature_KPT_map.end()){
-			WriteStructContext ws2(cvfs, "", CV_NODE_MAP);
+			cv::internal::WriteStructContext ws2(cvfs, "", CV_NODE_MAP);
 			cv::write(cvfs, "feature_id", itr->first);
 			feature_info = itr->second;
 			cv::write(cvfs, "keypoint_id",feature_info.keypoint_id);
@@ -682,11 +681,11 @@ int imageDB::readFeatureKptMap(const FileStorage& cvfs, const FileNode& node)
 
 int imageDB::writeKeyMap(FileStorage& cvfs, const string& name) const
 {
-	WriteStructContext ws(cvfs, name, CV_NODE_SEQ);
+	cv::internal::WriteStructContext ws(cvfs, name, CV_NODE_SEQ);
 
 	map<int,KeyPoint>::const_iterator itr = keypoint_map.begin();
 	while(itr!= keypoint_map.end()){
-		WriteStructContext ws2(cvfs, "", CV_NODE_MAP);
+		cv::internal::WriteStructContext ws2(cvfs, "", CV_NODE_MAP);
 		cv::write(cvfs, "keypoint_id", itr->first);
 		vector<KeyPoint>	kpt_vec;
 		kpt_vec.push_back(itr->second);
@@ -719,12 +718,12 @@ int imageDB::readKeyMap(const FileStorage& cvfs, const FileNode& node)
 
 int imageDB::writeImgInfoMap(FileStorage& cvfs, const string& name) const
 {
-	WriteStructContext ws(cvfs, name, CV_NODE_SEQ);
+	cv::internal::WriteStructContext ws(cvfs, name, CV_NODE_SEQ);
 
 	imageInfo	img_info;
 	map<int, imageInfo>::const_iterator itr = imgInfo_map.begin();
 	while(itr!= imgInfo_map.end()){
-		WriteStructContext ws2(cvfs, "", CV_NODE_SEQ);
+		cv::internal::WriteStructContext ws2(cvfs, "", CV_NODE_SEQ);
 		cv::write(cvfs, itr->first);
 		img_info = itr->second;
 		cv::write(cvfs, img_info.feature_num);
@@ -748,7 +747,7 @@ int imageDB::readImgInfoMap(const FileStorage& cvfs, const FileNode& node)
 	while(it != node.end()){
 		img_id = (int)(*it)[0];
 		img_info.feature_num = (int)(*it)[1];
-		img_info.img_size = Size((int)(*it)[2],(int)(*it)[3]);
+		img_info.img_size = cv::Size((int)(*it)[2],(int)(*it)[3]);
 		imgInfo_map.insert(pair<int,imageInfo>(img_id,img_info));
 
 		// create voteTable

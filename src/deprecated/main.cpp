@@ -40,7 +40,7 @@
 #include <time.h>
 
 #include "commonCvFunctions.h"
-#include <opencv2/highgui/highgui.hpp>
+#include "opencv2/highgui.hpp"
 #include "cameraCalibration.h"
 #include "guiAR.h"
 #ifdef _DEBUG

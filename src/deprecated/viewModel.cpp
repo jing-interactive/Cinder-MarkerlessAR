@@ -32,7 +32,7 @@
 //M*/
 #include "viewModel.h"
 #include "commonCvFunctions.h"
-#include <opencv2/imgproc/imgproc.hpp>
+#include "opencv2/imgproc.hpp"
 
 using namespace std;
 using namespace cv;

@@ -34,11 +34,9 @@
 
 #include <iostream>
 
-//OpenGL
-#include <GL/glut.h>
 //OpenCV
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include "opencv2/imgproc.hpp"
+#include "opencv2/highgui.hpp"
 
 #include "trackingOBJ.h"
 #include "viewModel.h"

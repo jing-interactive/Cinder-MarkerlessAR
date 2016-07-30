@@ -32,7 +32,7 @@
 //M*/
 #include "commonCvFunctions.h"
 #include "orException.h"
-#include <opencv2/highgui/highgui.hpp>
+#include "opencv2/highgui/highgui.hpp"
 
 using namespace std;
 using namespace cv;
@@ -281,7 +281,7 @@ bool checkRectShape(vector<Point2f>& rect_pts)
 
 
 // pts[0]:Top Left, pts[1]:Bottom Left, pts[2]:Bottom Right, pts[3]:Top Right
-Mat createMask(Size img_size, vector<Point2f>& pts)
+    Mat createMask(cv::Size img_size, vector<Point2f>& pts)
 {
 	Mat mask(img_size,CV_8UC1);
 	mask = 0;
@@ -454,7 +454,7 @@ int checkInsideArea(vector<Point2f>& points, vector<Point2f>& corner_pts, vector
 
 
 // judgment pts is whether all there within the image area
-bool checkPtInsideImage(Size img_size, vector<Point2f>& pts)
+    bool checkPtInsideImage(cv::Size img_size, vector<Point2f>& pts)
 {
 	vector<Point2f>::iterator itr = pts.begin();
 	while(itr != pts.end()){

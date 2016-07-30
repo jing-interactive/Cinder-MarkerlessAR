@@ -32,14 +32,13 @@
 //M*/
 #include "kltTrackingOBJ.h"
 #include "commonCvFunctions.h"
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/calib3d/calib3d.hpp>
-#include <opencv2/video/tracking.hpp>
+#include "opencv2/imgproc.hpp"
+#include "opencv2/calib3d.hpp"
+#include "opencv2/video/tracking.hpp"
 
 using namespace std;
 using namespace cv;
 using namespace cvar;
-using namespace cvar::tracking;
 
 kltTrackingOBJ::kltTrackingOBJ(void)
 {

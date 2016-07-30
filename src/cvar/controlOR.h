@@ -33,15 +33,13 @@
 #ifndef __CONTROL_OR__
 #define __CONTROL_OR__
 
-#include <opencv2/features2d/features2d.hpp>
+#include "opencv2/features2d.hpp"
 
 #include "visualWords.h"
 #include "imageDB.h"
 #include "orException.h"
 
 namespace cvar{
-
-namespace or{
 
 class controlOR
 {
@@ -95,13 +93,12 @@ private:
 	std::string detectorType;	// feature detector name
 	std::string descriptorType;	// feature descriptor name
 //	std::string matcherType;	// feature matcher name
-	cv::Ptr<cv::FeatureDetector>	feature_detector;	// feature detector
-	cv::Ptr<cv::DescriptorExtractor> descriptor_extractor;	// descriptor extractor
+	cv::Ptr<cv::Feature2D>	feature_detector;	// feature detector
+//	cv::Ptr<cv::DescriptorExtractor> descriptor_extractor;	// descriptor extractor
 //	cv::Ptr<cv::DescriptorMatcher>	descriptor_matcher;	// descriptor matcher
 //	int feature_dimention;	// dimention of descriptor
 	int voteNum;	// number of knn & vote (to keypoint)
 	visualWords	visual_words;
-};
 };
 };
 #endif

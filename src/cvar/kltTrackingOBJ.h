@@ -33,11 +33,10 @@
 #ifndef __KLT_TRACKING_OBJ__
 #define __KLT_TRACKING_OBJ__
 
-#include <opencv2/core/core.hpp>
+#include "opencv2/core.hpp"
 #include "trackingOBJ.h"
 
 namespace cvar{
-namespace tracking{
 
 class kltTrackingOBJ : public trackingOBJ
 {
@@ -78,5 +77,5 @@ public:
 };
 
 };
-};
+
 #endif

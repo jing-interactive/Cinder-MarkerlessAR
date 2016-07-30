@@ -31,13 +31,12 @@
 //
 //M*/
 #include "controlOR.h"
-#include <opencv2/nonfree/nonfree.hpp>
+//#include <opencv2/nonfree.hpp>
 #include <sstream>
 
 using namespace std;
 using namespace cv;
 using namespace cvar;
-using namespace cvar::or;
 //#include <iostream>
 
 controlOR::controlOR(void)
@@ -45,8 +44,8 @@ controlOR::controlOR(void)
 //	featureDetector = 0;
 	detectorType = "SURF";
 	descriptorType = "SURF";
-	feature_detector = 0;
-	descriptor_extractor = 0;
+//	feature_detector = 0;
+//	descriptor_extractor = 0;
 	initializeFeatureDetector();
 //	visual_words.setFeatureDimention(feature_dimention);
 	voteNum = 1;
@@ -162,43 +161,43 @@ vector<resultInfo> controlOR::queryImage(const Mat& src_img, int result_num)
 	return retInfo;
 }
 
-
-bool controlOR::setDetectorType(const std::string& detector_type)
-{
-	cv::Ptr<cv::FeatureDetector> tmp_detector;
-	try{
-		tmp_detector = FeatureDetector::create(detector_type);
-		if(tmp_detector.empty()){
-			return false;
-		}
-	}
-	catch(cv::Exception e){
-		return false;
-	}
-	this->feature_detector = tmp_detector;
-	this->detectorType = detector_type;
-
-	return true;
-}
-
-
-bool controlOR::setDescriptorType(const std::string& descriptor_type)
-{
-	cv::Ptr<cv::DescriptorExtractor> tmp_descriptor;
-	try{
-		tmp_descriptor = DescriptorExtractor::create(descriptor_type);
-		if(tmp_descriptor.empty()){
-			return false;
-		}
-	}
-	catch(cv::Exception e){
-		return false;
-	}
-	this->descriptor_extractor = tmp_descriptor;
-	this->descriptorType = descriptor_type;
-
-	return true;
-}
+//
+//bool controlOR::setDetectorType(const std::string& detector_type)
+//{
+//	cv::Ptr<cv::FeatureDetector> tmp_detector;
+//	try{
+//		tmp_detector = FeatureDetector::create(detector_type);
+//		if(tmp_detector.empty()){
+//			return false;
+//		}
+//	}
+//	catch(cv::Exception e){
+//		return false;
+//	}
+//	this->feature_detector = tmp_detector;
+//	this->detectorType = detector_type;
+//
+//	return true;
+//}
+//
+//
+//bool controlOR::setDescriptorType(const std::string& descriptor_type)
+//{
+//	cv::Ptr<cv::DescriptorExtractor> tmp_descriptor;
+//	try{
+//		tmp_descriptor = DescriptorExtractor::create(descriptor_type);
+//		if(tmp_descriptor.empty()){
+//			return false;
+//		}
+//	}
+//	catch(cv::Exception e){
+//		return false;
+//	}
+//	this->descriptor_extractor = tmp_descriptor;
+//	this->descriptorType = descriptor_type;
+//
+//	return true;
+//}
 
 
 //int controlOR::getFeatureIdVec(const vector<float>& desc_vec, vector<int>& id_list)
@@ -304,10 +303,10 @@ int controlOR::loadObjectDB(const string filename)
 void controlOR::read(FileNode& cvfn)
 {
 	voteNum = cvfn["voteNum"];
-	detectorType = cvfn["detectorType"];
-	descriptorType = cvfn["descriptorType"];
-	feature_detector->create(detectorType);
-	descriptor_extractor->create(descriptorType);
+//	detectorType = cvfn["detectorType"];
+//	descriptorType = cvfn["descriptorType"];
+//    feature_detector = AKAZE::create();
+//	descriptor_extractor->create(descriptorType);
 }
 
 
@@ -324,7 +323,7 @@ int controlOR::saveObjectDB(const string filename) const
 
 void controlOR::write(FileStorage& fs, string name) const
 {
-	WriteStructContext ws(fs, name, CV_NODE_MAP);
+    cv::internal::WriteStructContext ws(fs, name, CV_NODE_MAP);
 	cv::write(fs, "voteNum", voteNum);
 	cv::write(fs, "detectorType", detectorType);
 	cv::write(fs, "descriptorType", descriptorType);
@@ -335,28 +334,31 @@ void controlOR::write(FileStorage& fs, string name) const
 // initialize
 int controlOR::initializeFeatureDetector()
 {
+    feature_detector = AKAZE::create();
+//
 //	if(featureDetector)
-	if(feature_detector || descriptor_extractor)
-		releaseFeatureDetector();
+//	if(feature_detector || descriptor_extractor)
+//		releaseFeatureDetector();
 //	SURF* surf_pt = new SURF(500,4,2,true);
 //	featureDetector = surf_pt;
 //	feature_dimention = 128;
-	cv::initModule_nonfree();
-	feature_detector = FeatureDetector::create(detectorType);	// create feature detector
-	descriptor_extractor = DescriptorExtractor::create(descriptorType);	// create descriptor extractor
+//	cv::initModule_nonfree();
+//	feature_detector = FeatureDetector::create(detectorType);	// create feature detector
+//	descriptor_extractor = DescriptorExtractor::create(descriptorType);	// create descriptor extractor
 
 	return 0;
 }
 
 //int controlOR::extractFeatures(const Mat& src_img, vector<KeyPoint>& kpt, vector<float>& descriptor)
-int controlOR::extractFeatures(const cv::Mat& src_img, cv::vector<cv::KeyPoint>& kpt, cv::Mat& descriptor) const
+int controlOR::extractFeatures(const cv::Mat& src_img, std::vector<cv::KeyPoint>& kpt, cv::Mat& descriptor) const
 {
 	// extract freak
 	try{
 		// keypoints detection from a query image
-		feature_detector->detect(src_img, kpt);
+        feature_detector->detectAndCompute(src_img, noArray(), kpt, descriptor);
+
 		// descriptor extraction
-		descriptor_extractor->compute(src_img, kpt, descriptor);
+//		descriptor_extractor->compute(src_img, kpt, descriptor);
 
 //		(*(SURF*)featureDetector)(src_img, Mat(), kpt, descriptor);
 	//	cout << ",kpt:" << kpt.size() << ",";
@@ -378,9 +380,9 @@ int controlOR::releaseFeatureDetector()
 //	delete (SURF*)featureDetector;
 //	featureDetector = 0;
 	feature_detector.release();
-	feature_detector = 0;
-	descriptor_extractor.release();
-	descriptor_extractor = 0;
+//	feature_detector = 0;
+//	descriptor_extractor.release();
+//	descriptor_extractor = 0;
 
 	return 0;
 }

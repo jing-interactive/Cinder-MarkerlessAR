@@ -31,7 +31,8 @@
 //
 //M*/
 #include "utilFunctions.h"
-#include <opencv2/highgui/highgui.hpp>
+#include "opencv2/highgui.hpp"
+#include "opencv2/imgproc.hpp"
 
 using namespace std;
 using namespace cv;
@@ -123,19 +124,19 @@ CvMat* loadCsvFileAsMatrix(char* filename, int cv_type)
 void createMatchingImage(Mat& src_img, Mat& dest_img, vector<Point2f>& src_pts, vector<Point2f>& dest_pts)
 {
 	assert(src_pts.size() == dest_pts.size());
-	vector<Point> src_pts_i, dest_pts_i;
+    vector<cv::Point> src_pts_i, dest_pts_i;
 
 	int size = src_pts.size();
 	for(int i=0; i<size; i++){
-		src_pts_i.push_back((Point)src_pts[i]);
-		dest_pts_i.push_back((Point)dest_pts[i]);
+        src_pts_i.push_back((cv::Point)src_pts[i]);
+        dest_pts_i.push_back((cv::Point)dest_pts[i]);
 	}
 
 	createMatchingImage(src_img, dest_img, src_pts_i, dest_pts_i);
 }
 
 
-void createMatchingImage(Mat& src_img, Mat& dest_img, vector<Point>& src_pts, vector<Point>& dest_pts)
+    void createMatchingImage(Mat& src_img, Mat& dest_img, vector<cv::Point>& src_pts, vector<cv::Point>& dest_pts)
 {
 	assert(src_pts.size() == dest_pts.size());
 	int width, height;
@@ -146,13 +147,13 @@ void createMatchingImage(Mat& src_img, Mat& dest_img, vector<Point>& src_pts, ve
 	height = src_img.rows + dest_img.rows;
 	Mat resultimg(height, width, CV_8UC1);
 	resultimg = Scalar(0);
-	Mat tmpMat(resultimg,Rect(0,0, src_img.cols, src_img.rows));
+	Mat tmpMat(resultimg,cv::Rect(0,0, src_img.cols, src_img.rows));
 	src_img.copyTo(tmpMat);
-	Mat tmpMat2(resultimg,Rect(0, src_img.rows, dest_img.cols, dest_img.rows));
+	Mat tmpMat2(resultimg,cv::Rect(0, src_img.rows, dest_img.cols, dest_img.rows));
 	dest_img.copyTo(tmpMat2);
 
 	int size = src_pts.size();
-	Point pt;
+	cv::Point pt;
 	pt.x = 0;
 	pt.y = src_img.rows;
 	for(int i=0;i<size;i++){
@@ -186,7 +187,7 @@ void drawLineContour(Mat& src_img, vector<Point2f>& points, Scalar& color, int t
 	assert(pt_num > 1);
 
 	Point2f b_pt, e_pt;
-	Size img_size = src_img.size();
+    cv::Size img_size = src_img.size();
 
 	b_pt = points[pt_num-1];
 	e_pt = points[0];

@@ -30,56 +30,21 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 //M*/
-#ifndef __TRACKING_OBJ__
-#define __TRACKING_OBJ__
+#ifndef __UTIL_FUNCTIONS__
+#define __UTIL_FUNCTIONS__
 
-#include <opencv2/core/core.hpp>
+#include "opencv2/core.hpp"
 
 namespace cvar{
-namespace tracking{
 
-class trackingOBJ
-{
-protected:
-	trackingOBJ(void);
-
-public:
-	virtual ~trackingOBJ(void);
-
-	typedef enum{
-		TRACKER_KLT = 1,
-		TRACKER_ORB = 2
-	}TRACKER_TYPE;
-
-public:
-	//! create tracking OBJ
-	/*!
-	\param[in] type tracker type
-	\return pointer of tracker
-	*/
-	static trackingOBJ* create(TRACKER_TYPE type);
-
-	//! Start Tracking
-	/*! 
-	\param[in] grayImg first farme in gray scale
-	\param[in] pts initial object position: pts[0]:Top Left, pts[1]:Bottom Left, pts[2]:Bottom Right, pts[3]:Top Right
-	*/
-	virtual void startTracking(const cv::Mat& grayImg, std::vector<cv::Point2f>& pts) = 0;
-
-	//! Continue Tracking
-	/*!
-	\param[in] grayImg input gray scale image
-	\return false if tracking failed
-	*/
-	virtual bool onTracking(const cv::Mat& grayImg) = 0;
-
-	//! Get current obj position
-	/*!
-	\return Homography from previous frame
-	*/
-	virtual cv::Mat& getHomographyMat() = 0;
-};
+// Debugging functions
+CvMat* loadCsvFileAsMatrix(char* filename, int cv_type);
+void createMatchingImage(cv::Mat& src_img, cv::Mat& dest_img, std::vector<cv::Point>& src_pts, std::vector<cv::Point>& dest_pts);
+void createMatchingImage(cv::Mat& src_img, cv::Mat& dest_img, std::vector<cv::Point2f>& src_pts, std::vector<cv::Point2f>& dest_pts);
+void truncatePoint(cv::Size& size, cv::Point2f& pt);	// To approximate the point that protrude a specified size to the size in the vicinity of point
+void drawLineContour(cv::Mat& src_img, std::vector<cv::Point2f>& points, cv::Scalar& color, int thickness=1, int lineType=8, int shift=0);	// Draw a straight line connecting the four points
+void drawPoints(cv::Mat& src_img, std::vector<cv::Point2f>& points, std::vector<unsigned char>& mask_vec, cv::Scalar& color, int thickness=1, int lineType=8, int shift=0);	// Draw a straight line connecting the four points
 
 };
-};
+
 #endif

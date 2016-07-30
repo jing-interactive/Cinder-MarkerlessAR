@@ -20,7 +20,7 @@
 // so, subject to the following conditions:
 //
 // The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+    // copies or substantial portions of the Software.
 // 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 // INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
@@ -33,7 +33,7 @@
 #ifndef __COMMON_CV_FUNCTIONS__
 #define __COMMON_CV_FUNCTIONS__
 
-#include <opencv2/core/core.hpp>
+#include "opencv2/core/core.hpp"
 #include <fstream>
 
 namespace cvar{

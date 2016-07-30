@@ -33,7 +33,7 @@
 #ifndef __VIEW_MODEL__
 #define __VIEW_MODEL__
 
-#include <opencv2/core/core.hpp>
+#include "opencv2/core.hpp"
 #include "modelObjectFactory.h"
 //#include "GLMetaseq.h"	// Model loader
 

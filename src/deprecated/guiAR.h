@@ -30,32 +30,12 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 //M*/
-#include "trackingOBJ.h"
-#include "kltTrackingOBJ.h"
-//#include "orbTrackingOBJ.h"
+#include "controlOR.h"
 
-using namespace cvar;
-using namespace cvar::tracking;
+namespace cvar{
 
-trackingOBJ::trackingOBJ(void)
-{
-}
+void setControlOR(controlOR& ctrlOR_cls);
+int startGUI(int argc, char *argv[]);
+void setARConfigFile(std::string& conf_f);
 
-
-trackingOBJ::~trackingOBJ(void)
-{
-}
-
-
-trackingOBJ* trackingOBJ::create(TRACKER_TYPE type)
-{
-	if(type == TRACKER_KLT){
-		return new kltTrackingOBJ();
-	}
-//	else if(type == TRACKER_ORB){
-//		return new orbTrackingOBJ();
-//	}
-	else{
-		return 0;
-	}
-}
+};

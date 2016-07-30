@@ -33,11 +33,10 @@
 #ifndef __VISUAL_WORDS__
 #define __VISUAL_WORDS__
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/features2d/features2d.hpp>
+#include "opencv2/core.hpp"
+#include "opencv2/features2d.hpp"
 
 namespace cvar{
-namespace or{
 
 class visualWords
 {
@@ -91,6 +90,5 @@ private:
 	static const int version = 120;
 };
 
-};
 };
 #endif

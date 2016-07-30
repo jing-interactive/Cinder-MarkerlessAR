@@ -33,10 +33,9 @@
 #ifndef __IMAGE_DB__
 #define __IMAGE_DB__
 
-#include <opencv2/features2d/features2d.hpp>
+#include "opencv2/features2d.hpp"
 
 namespace cvar{
-namespace or{
 
 typedef struct{
 	int in_feat_i;
@@ -127,6 +126,5 @@ private:
 //	double scale_diff_threshold;	// Tolerance on the scale of the corresponding point (the ratio of the size:> 1)
 };
 
-};
 };
 #endif
